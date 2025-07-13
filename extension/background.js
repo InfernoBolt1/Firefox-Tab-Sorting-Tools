@@ -10,7 +10,7 @@ const MENU_ITEMS = [
 
 // Create context menus on install/update
 browser.runtime.onInstalled.addListener(async () => {
-  await browser.contextMenus.removeAll(); // 🧹 Clear old menus
+  await browser.contextMenus.removeAll(); // Clear old menus
 
   // Parent menu
   browser.contextMenus.create({
@@ -90,10 +90,10 @@ browser.contextMenus.onClicked.addListener(async (info, tab) => {
       }
     }
 
-    // 🔔 Optional user feedback
+    // User feedback
     await browser.notifications.create({
       type: "basic",
-      iconUrl: "icons/icon-48.png", // Optional - replace with your icon path if available
+      iconUrl: "icons/icon-48.png",
       title: "Tab Tools",
       message: `Action "${info.menuItemId.replace(/-/g, ' ')}" completed.`
     });
