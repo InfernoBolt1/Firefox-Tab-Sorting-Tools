@@ -1,32 +1,38 @@
-browser.runtime.onInstalled.addListener(() => {
-  // Parent submenu
+// Constants
+const MENU_PARENT_ID = "tab-tools";
+const MENU_ITEMS = [
+  { id: "reverse", title: "Reverse Selected Tabs" },
+  { id: "sort-title", title: "Sort Selected Tabs by Title" },
+  { id: "sort-url", title: "Sort Selected Tabs by URL" },
+  { id: "move-start", title: "Move Selected Tabs to Start" },
+  { id: "move-end", title: "Move Selected Tabs to End" },
+];
+
+// Create context menus on install/update
+browser.runtime.onInstalled.addListener(async () => {
+  await browser.contextMenus.removeAll(); // 🧹 Clear old menus
+
+  // Parent menu
   browser.contextMenus.create({
-    id: "tab-tools",
-    title: "🧹 Tab Tools",
+    id: MENU_PARENT_ID,
+    title: "Tab Sorting Tools",
     contexts: ["tab"]
   });
 
-  // Submenu items
-  const menuItems = [
-    { id: "reverse", title: "Reverse Selected Tabs" },
-    { id: "sort-title", title: "Sort Selected Tabs by Title" },
-    { id: "sort-url", title: "Sort Selected Tabs by URL" },
-    { id: "move-start", title: "Move Selected Tabs to Start" },
-    { id: "move-end", title: "Move Selected Tabs to End" },
-  ];
-
-  menuItems.forEach(item => {
+  // Submenus
+  MENU_ITEMS.forEach(item => {
     browser.contextMenus.create({
       id: item.id,
       title: item.title,
-      parentId: "tab-tools",
+      parentId: MENU_PARENT_ID,
       contexts: ["tab"]
     });
   });
 });
 
+// Handle context menu clicks
 browser.contextMenus.onClicked.addListener(async (info, tab) => {
-  if (!["reverse", "sort-title", "sort-url", "move-start", "move-end"].includes(info.menuItemId)) {
+  if (!MENU_ITEMS.map(item => item.id).includes(info.menuItemId)) {
     return;
   }
 
@@ -83,6 +89,14 @@ browser.contextMenus.onClicked.addListener(async (info, tab) => {
         break;
       }
     }
+
+    // 🔔 Optional user feedback
+    await browser.notifications.create({
+      type: "basic",
+      iconUrl: "icons/icon-48.png", // Optional - replace with your icon path if available
+      title: "Tab Tools",
+      message: `Action "${info.menuItemId.replace(/-/g, ' ')}" completed.`
+    });
 
     console.log(`Action "${info.menuItemId}" completed.`);
   } catch (err) {

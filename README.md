@@ -15,9 +15,16 @@
 ## Requirements
 
 - Firefox 109 or later
-- Permissions: `tabs`, `contextMenus`
+- Permissions: `tabs`, `contextMenus`, `notifications`
 
 The extension requests these permissions on installation. It will not function without them.
+
+## Download
+
+Get the latest version here:
+
+- [GitHub Releases](https://github.com/yourusername/yourrepo/releases)  
+- [Firefox Add-ons (AMO)](https://addons.mozilla.org/en-US/firefox/addon/your-addon-id/) - Easiest and best way to do it.
 
 ## License
 
@@ -27,4 +34,4 @@ This project is licensed under the [MIT License](LICENSE). You are free to use, 
 
 There are currently **no planned features**.
 
-However, suggestions are welcome — feel free to open an issue on the GitHub repository.
+However, suggestions are welcome — feel free to open an issue on the [GitHub repository]().
