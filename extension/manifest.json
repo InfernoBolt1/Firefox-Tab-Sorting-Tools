@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Tab Sorting Tools",
+  "version": "1.0",
+  "description": "Enhance your Firefox tab bar: reverse, sort, and move selected tabs easily via a context menu.",
+  "permissions": [
+    "tabs",
+    "contextMenus"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "tabsortingtools@infernobolt1.uk",
+      "strict_min_version": "109.0"
+    }
+  }
+}
