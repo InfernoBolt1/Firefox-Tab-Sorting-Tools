@@ -23,8 +23,8 @@ The extension requests these permissions on installation. It will not function w
 
 Get the latest version here:
 
-- [GitHub Releases](https://github.com/yourusername/yourrepo/releases)  
-- [Firefox Add-ons (AMO)](https://addons.mozilla.org/en-US/firefox/addon/your-addon-id/) - Easiest and best way to do it.
+- [GitHub Releases](https://github.com/InfernoBolt1/Firefox-Tab-Sorting-Tools/releases)  
+- [Firefox Add-ons (AMO)](https://addons.mozilla.org/en-GB/firefox/addon/tab-sorting-tools/) - Easiest and best way to do it.
 
 ## License
 
