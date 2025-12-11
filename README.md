@@ -32,6 +32,7 @@ This project is licensed under the [MIT License](LICENSE). You are free to use, 
 
 ## Future Improvements
 
-There are currently **no planned features**.
+There is currently **1 planned feature**:
+- Adding an undo button to undo the last task it completed. 
 
-However, suggestions are welcome — feel free to open an issue on the [GitHub repository]().
+However, more suggestions are welcome — please feel free to open an issue on the [GitHub repository](https://github.com/InfernoBolt1/Firefox-Tab-Sorting-Tools/issues) and label it as an enhancement.
