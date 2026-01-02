@@ -32,7 +32,8 @@ This project is licensed under the [MIT License](LICENSE). You are free to use, 
 
 ## Future Improvements
 
-There is currently **1 planned feature**:
-- Adding an undo button to undo the last task it completed. 
+There are currently **2 planned new features**:
+- Adding an undo button to undo the last task it completed.
+- Adding a random sort button to randomly sort selected tabs. 
 
 However, more suggestions are welcome — please feel free to open an issue on the [GitHub repository](https://github.com/InfernoBolt1/Firefox-Tab-Sorting-Tools/issues) and label it as an enhancement.
