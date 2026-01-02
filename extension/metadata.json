@@ -1,9 +1,9 @@
 {
-  "summary": "Sort, reverse, or move selected Firefox tabs using a smart context menu.",
+  "summary": "Sort, reverse, randomise, move, and undo selected Firefox tabs using a smart context menu.",
   "categories": ["tabs"],
   "author": "Evan S.",
   "homepage": "https://github.com/InfernoBolt1/Firefox-Tab-Sorting-Tools",
   "support_url": "https://github.com/InfernoBolt1/Firefox-Tab-Sorting-Tools/issues",
   "license": "MIT",
-  "tags": ["tabs", "context-menu", "sort", "reverse", "move", "firefox"]
+  "tags": ["tabs", "menus", "sort", "reverse", "random", "undo", "move", "firefox"]
 }
