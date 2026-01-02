@@ -14,7 +14,13 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "tabsorter@infernobolt1.uk",
-      "strict_min_version": "146.0"
+      "strict_min_version": "146.0",
+      "data_collection_permissions": {
+        "collects_personal_data": false,
+        "collects_user_activity": false,
+        "collects_website_content": false,
+        "collects_identifiers": false
+      }
     }
   },
   "icons": {
