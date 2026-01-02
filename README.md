@@ -31,8 +31,6 @@ Get the latest version here:
 - [GitHub Releases](https://github.com/InfernoBolt1/Firefox-Tab-Sorting-Tools/releases)
 - [Firefox Add-ons (AMO)](https://addons.mozilla.org/en-GB/firefox/addon/tab-sorting-tools/) – Recommended
 
-> **Note:** Version 1.3 is pending Mozilla Add-ons (AMO) review. The signed `.xpi` will be published once verification is complete.
-
 ## License
 
 This project is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute it under the terms of that licence.
