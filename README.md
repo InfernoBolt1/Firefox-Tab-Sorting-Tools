@@ -12,7 +12,7 @@
 - Move selected tabs to the **end** of the tab bar
 - **Undo** the last tab operation
 
-> Note: These actions apply only to tabs selected manually using `Ctrl+Click` (or `Cmd+Click` on macOS) in the tab bar.
+> **Note:** These actions apply only to tabs selected manually using `Ctrl+Click` (or `Cmd+Click` on macOS) in the tab bar.
 
 ## Requirements
 
@@ -30,6 +30,8 @@ Get the latest version here:
 
 - [GitHub Releases](https://github.com/InfernoBolt1/Firefox-Tab-Sorting-Tools/releases)
 - [Firefox Add-ons (AMO)](https://addons.mozilla.org/en-GB/firefox/addon/tab-sorting-tools/) – Recommended
+
+> **Note:** Version 1.3 is pending Mozilla Add-ons (AMO) review. The signed `.xpi` will be published once verification is complete.
 
 ## License
 
