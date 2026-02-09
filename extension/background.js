@@ -1,7 +1,7 @@
-// Parent ID for the tab context menu entry
+// Unique identifier for the root context menu item
 const MENU_PARENT_ID = "tab-tools";
 
-// Definition of all child menu items shown under "Tab Sorting Tools"
+// Defines all available tab sorting operations accessible from the context menu
 const MENU_ITEMS = [
   { id: "reverse", title: "Reverse Selected Tabs" },
   { id: "sort-title", title: "Sort Selected Tabs by Title" },
@@ -12,16 +12,16 @@ const MENU_ITEMS = [
   { id: "undo", title: "Undo Last Action" }
 ];
 
-// Stores the most recent tab operation to allow a single-level undo
+// Stores state of the last non-undo operation to support single-level undo
 let lastAction = null;
 
-// Creates (or recreates) the tab context menu structure
-// Called on install and on browser startup to ensure menus exist
+// Initialize the context menu on install and startup
+// This ensures the menu structure is always available, handling browser updates/restarts
 async function createMenus() {
   // Clear any existing menus to avoid duplicates
   await browser.menus.removeAll();
 
-  // Create the parent menu item
+  // Creates the parent menu
   browser.menus.create({
     id: MENU_PARENT_ID,
     title: "Tab Sorting Tools",
@@ -43,7 +43,8 @@ async function createMenus() {
 browser.runtime.onInstalled.addListener(createMenus);
 browser.runtime.onStartup.addListener(createMenus);
 
-// Saves the current tab order so it can be restored later via undo
+// Records the current tab order before any manipulation operation
+// Used by undoLastAction() to restore tabs to their previous positions
 function saveUndoState(tabs) {
   lastAction = {
     windowId: tabs[0].windowId,
@@ -54,10 +55,10 @@ function saveUndoState(tabs) {
   };
 }
 
-// Restores the previous tab order if an undo state exists
+// Restores tabs to their previous positions if undo data is available
+// Clears undo state after restoring to prevent accidental double-undos
 async function undoLastAction() {
   if (!lastAction) {
-    // Inform the user if there is nothing to undo
     await browser.notifications.create({
       type: "basic",
       iconUrl: "icons/icon-48.png",
@@ -67,7 +68,7 @@ async function undoLastAction() {
     return;
   }
 
-  // Sort tabs by their original index to ensure correct restoration order
+  // Sort by original index to handle cases where tabs were moved in various orders
   const sortedByIndex = [...lastAction.tabs].sort((a, b) => a.index - b.index);
 
   for (const tab of sortedByIndex) {
@@ -77,7 +78,7 @@ async function undoLastAction() {
     });
   }
 
-  // Clear the undo state once applied
+  // Clear undo state after applying
   lastAction = null;
 
   await browser.notifications.create({
@@ -88,7 +89,7 @@ async function undoLastAction() {
   });
 }
 
-// In-place Fisher–Yates shuffle used for random tab ordering
+// Fisher–Yates shuffle algorithm for random tab ordering
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -96,22 +97,22 @@ function shuffleArray(array) {
   }
 }
 
-// Handles clicks on any of the context menu items
+// Main handler for tab context menu interactions
 browser.menus.onClicked.addListener(async (info) => {
   try {
-    // Undo is handled separately as it does not require selected tabs
+    // Handle undo action separately since it doesn't require tab selection
     if (info.menuItemId === "undo") {
       await undoLastAction();
       return;
     }
 
-    // Get all currently highlighted (multi-selected) tabs in the window
+    // Get all highlighted tabs in the current window (user's multi-selection)
     const tabs = await browser.tabs.query({
       highlighted: true,
       currentWindow: true
     });
 
-    // No action needed if fewer than two tabs are selected
+    // Sorting operations require at least 2 tabs
     if (tabs.length < 2) return;
 
     // Save current state before performing any operation
@@ -119,7 +120,7 @@ browser.menus.onClicked.addListener(async (info) => {
 
     let orderedTabs = [...tabs];
 
-    // Perform the selected operation
+    // Apply the selected sorting/rearrangement operation
     switch (info.menuItemId) {
       case "reverse":
         orderedTabs.reverse();
@@ -156,7 +157,7 @@ browser.menus.onClicked.addListener(async (info) => {
         return;
     }
 
-    // Apply the new tab order starting from the first selected tab’s position
+    // Move tabs to their new positions starting from the original selection's location
     for (let i = 0; i < orderedTabs.length; i++) {
       await browser.tabs.move(orderedTabs[i].id, {
         index: tabs[0].index + i
